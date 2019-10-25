@@ -1,8 +1,6 @@
 package br.pro.hashi.ensino.desagil.desafio;
 
-import br.pro.hashi.ensino.desagil.desafio.model.Board;
-import br.pro.hashi.ensino.desagil.desafio.model.Element;
-import br.pro.hashi.ensino.desagil.desafio.model.Model;
+import br.pro.hashi.ensino.desagil.desafio.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +51,9 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         Board board = model.getBoard();
 
+        HumanPlayer humanPlayer = model.getHumanPlayer();
+        CpuPlayer cpuPlayer = model.getCpuPlayer();
+
         for (int i = 0; i < board.getNumRows(); i++) {
             for (int j = 0; j < board.getNumCols(); j++) {
                 if (board.isWall(i, j)) {
@@ -71,6 +72,12 @@ public class View extends JPanel {
 
             g.drawImage(image, col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE, this);
         });
+
+        g.setColor(Color.BLUE);
+
+
+        g.drawString("Human Player:" + humanPlayer.getPoints(), humanPlayer.getCol() * 50, humanPlayer.getRow() * 50);
+        g.drawString("CPU Player:" + cpuPlayer.getPoints(), cpuPlayer.getCol() * 50, cpuPlayer.getRow() * 50);
 
         // Linha necessária para evitar atrasos
         // de renderização em sistemas Linux.
